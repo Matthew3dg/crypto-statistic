@@ -1,0 +1,60 @@
+"use client";
+
+import { Card } from "@/shared/ui/Card";
+import { useGetTrendingQuery } from "@/shared/api/coingecko";
+import Image from "next/image";
+
+export function NewsFeed() {
+  const { data, isLoading, isError } = useGetTrendingQuery();
+
+  return (
+    <Card title="Trending Coins">
+      {isLoading ? (
+        <div className="text-sm text-zinc-500">Loading...</div>
+      ) : isError ? (
+        <div className="text-sm text-red-600">Failed to load trending coins</div>
+      ) : (
+        <ul className="space-y-3">
+          {data?.coins.slice(0, 10).map((coin) => (
+            <li key={coin.item.id} className="text-sm">
+              <div className="flex items-center gap-2">
+                <Image
+                  src={coin.item.thumb}
+                  alt={coin.item.name}
+                  width={16}
+                  height={16}
+                  className="w-4 h-4 rounded-full"
+                />
+                <div className="flex-1">
+                  <div className="text-zinc-800 font-medium">
+                    {coin.item.name} ({coin.item.symbol.toUpperCase()})
+                  </div>
+                  <div className="text-xs text-zinc-500">
+                    Rank #{coin.item.market_cap_rank || "N/A"}
+                    {coin.item.data?.price && (
+                      <span className="ml-2">
+                        ${coin.item.data.price.toFixed(2)}
+                        {coin.item.data.price_change_percentage_24h?.usd && (
+                          <span
+                            className={`ml-1 ${
+                              coin.item.data.price_change_percentage_24h.usd >= 0
+                                ? "text-green-600"
+                                : "text-red-600"
+                            }`}
+                          >
+                            ({coin.item.data.price_change_percentage_24h.usd >= 0 ? "+" : ""}
+                            {coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%)
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
+  );
+}
