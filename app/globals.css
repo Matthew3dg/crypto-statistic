@@ -1,11 +1,27 @@
 @import "tailwindcss";
 
+/* Color tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b1026;
+  --foreground: #0f172a;
+}
+
+/* Animated gradient background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body {
-  background: #ffffff;
+  background: linear-gradient(120deg, #0ea5e9, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradientShift 18s ease infinite;
   color: #171717;
 }

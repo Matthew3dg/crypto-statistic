@@ -1,33 +1,40 @@
-import { CryptoPrices } from "@/widgets/crypto-prices/ui/CryptoPrices";
-import { NewsFeed } from "@/widgets/news/ui/NewsFeed";
-import { Converter } from "@/widgets/converter/ui/Converter";
-import { Portfolio } from "@/widgets/portfolio/ui/Portfolio";
-import { Alerts } from "@/widgets/alerts/ui/Alerts";
-import { StocksPlaceholder } from "@/widgets/stocks/ui/StocksPlaceholder";
+import Link from "next/link";
+import type { Metadata } from "next";
+import Hero from "./components/Hero";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Welcome to CryptoHub — track markets and convert currencies.",
+};
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="text-2xl font-semibold mb-6">Market Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="lg:col-span-2">
-          <CryptoPrices />
+    <main className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-30" />
+      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[520px] h-[520px] opacity-60">
+        <Hero />
+      </div>
+      <div className="mx-auto max-w-4xl px-6 text-center relative">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-sm">
+          Your Gateway to Crypto Markets
+        </h1>
+        <p className="mt-4 text-base md:text-lg text-white/90 max-w-2xl mx-auto">
+          Real-time prices, trending coins, and an easy converter — all in one place.
+        </p>
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            href="/market"
+            className="group inline-flex items-center justify-center rounded-xl bg-white/90 text-zinc-900 px-6 py-3 text-sm font-semibold shadow-lg backdrop-blur hover:bg-white transition transform hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Market Dashboard
+          </Link>
+          <Link
+            href="/converter"
+            className="group inline-flex items-center justify-center rounded-xl border border-white/40 bg-white/20 text-white px-6 py-3 text-sm font-semibold shadow-lg backdrop-blur hover:bg-white/30 transition transform hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Converter
+          </Link>
         </div>
-        {/* <div>
-          <Portfolio />
-        </div> */}
-        <div>
-          <Converter />
-        </div>
-        {/* <div>
-          <Alerts />
-        </div> */}
-        <div className="lg:col-span-2">
-          <NewsFeed />
-        </div>
-        {/* <div>
-          <StocksPlaceholder />
-        </div> */}
       </div>
     </main>
   );
