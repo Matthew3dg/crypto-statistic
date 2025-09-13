@@ -1,0 +1,26 @@
+---
+description: |
+  Follow the Feature-Sliced Design (FSD) architecture when writing or modifying code 
+  in the "next-app" project.
+
+  Layers are standardized across all FSD projects. You don't have to use all of the layers, 
+  but their names are important. There are currently seven of them (from top to bottom):
+
+  - **App** — everything that makes the app run (routing, entrypoints, global styles, providers).
+  - **Processes** — long-living business processes (e.g., auth-flow).
+  - **Pages** — pages composed of widgets/features.
+  - **Widgets** — large self-contained chunks of functionality or UI, usually delivering an entire use case.
+  - **Features** — reused implementations of entire product features, i.e. actions that bring business value to the user.
+  - **Entities** — business entities that the project works with, like user or product.
+  - **Shared** — reusable functionality, especially when it's detached from the specifics of the project/business.
+
+  Respect the dependency rule:
+  `app → processes → pages → widgets → features → entities → shared`
+
+  Do not bypass layers using shortcuts or absolute imports.  
+  Reusable logic belongs in `shared`.  
+  Each feature or entity must be self-contained (UI + model + API inside its slice).
+globs:
+  - "next-app/**"
+alwaysApply: true
+---
