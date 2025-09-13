@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-30" />
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[500px] h-[500px] opacity-50">
         <Hero />
       </div>
