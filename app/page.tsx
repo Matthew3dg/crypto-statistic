@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Hero from "./components/Hero";
+import Hero from "@/shared/ui/Hero";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden">
       <div className="absolute inset-0 pointer-events-none opacity-30" />
-      <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[520px] h-[520px] opacity-60">
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[500px] h-[500px] opacity-50">
         <Hero />
       </div>
       <div className="mx-auto max-w-4xl px-6 text-center relative">
