@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "@/shared/ui/Card";
-import { useGetTrendingQuery } from "@/shared/api/coingecko";
+import { Card } from "@/src/shared/ui/Card";
+import { useGetTrendingQuery } from "@/src/shared/api/coingecko";
 import Image from "next/image";
 
 export function NewsFeed() {

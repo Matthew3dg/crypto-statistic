@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CryptoPrices } from "@/widgets/crypto-prices/ui/CryptoPrices";
-import { NewsFeed } from "@/widgets/news/ui/NewsFeed";
+import { CryptoPrices } from "@/src/widgets/crypto-prices/ui/CryptoPrices";
+import { NewsFeed } from "@/src/widgets/news/ui/NewsFeed";
 
 export const metadata: Metadata = {
   title: "Market Dashboard",

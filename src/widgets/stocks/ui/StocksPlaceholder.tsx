@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/shared/ui/Card";
+import { Card } from "@/src/shared/ui/Card";
 
 export function StocksPlaceholder() {
   return (

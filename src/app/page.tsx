@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Hero from "@/shared/ui/Hero";
+import Hero from "@/src/shared/ui/Hero";
 
 export const metadata: Metadata = {
   title: "Home",

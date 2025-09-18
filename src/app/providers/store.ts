@@ -1,7 +1,7 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
-import { coingeckoApi } from "@/shared/api/coingecko";
+import { coingeckoApi } from "@/src/shared/api/coingecko";
 
 export const makeStore = () =>
   configureStore({

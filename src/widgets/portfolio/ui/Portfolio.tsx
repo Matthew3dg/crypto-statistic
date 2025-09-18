@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "@/shared/ui/Card";
-import { formatNumber } from "@/shared/lib/format";
+import { Card } from "@/src/shared/ui/Card";
+import { formatNumber } from "@/src/shared/lib/format";
 
 export function Portfolio() {
   // Placeholder portfolio balances and a tiny SVG chart stub

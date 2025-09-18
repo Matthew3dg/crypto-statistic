@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Converter } from "@/widgets/converter/ui/Converter";
+import { Converter } from "@/src/widgets/converter/ui/Converter";
 
 export const metadata: Metadata = {
   title: "Converter",

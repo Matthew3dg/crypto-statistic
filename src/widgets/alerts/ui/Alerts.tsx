@@ -1,7 +1,7 @@
 "use client";
 
-import { Card } from "@/shared/ui/Card";
-import { formatNumber } from "@/shared/lib/format";
+import { Card } from "@/src/shared/ui/Card";
+import { formatNumber } from "@/src/shared/lib/format";
 import { useState } from "react";
 
 export function Alerts() {

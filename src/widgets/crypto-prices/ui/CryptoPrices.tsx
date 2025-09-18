@@ -1,8 +1,8 @@
 "use client";
 
-import { useGetTopCoinsQuery } from "@/shared/api/coingecko";
-import { formatNumber } from "@/shared/lib/format";
-import { Card } from "@/shared/ui/Card";
+import { useGetTopCoinsQuery } from "@/src/shared/api/coingecko";
+import { formatNumber } from "@/src/shared/lib/format";
+import { Card } from "@/src/shared/ui/Card";
 import Image from "next/image";
 
 export function CryptoPrices() {

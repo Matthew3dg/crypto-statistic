@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Card } from "@/shared/ui/Card";
-import { formatNumber } from "@/shared/lib/format";
-import { useGetSimplePriceQuery } from "@/shared/api/coingecko";
+import { Card } from "@/src/shared/ui/Card";
+import { formatNumber } from "@/src/shared/lib/format";
+import { useGetSimplePriceQuery } from "@/src/shared/api/coingecko";
 
 const DEFAULT_FROM = "bitcoin";
 const DEFAULT_TO = "usd";
