@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { makeStore, AppStore } from "./store";
 
 export default function StoreProvider({ children }: PropsWithChildren) {
-  const storeRef = useRef<AppStore>();
+  const storeRef = useRef<AppStore | undefined>(undefined);
   if (!storeRef.current) {
     storeRef.current = makeStore();
   }
