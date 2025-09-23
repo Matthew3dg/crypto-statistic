@@ -49,17 +49,19 @@ export function Converter() {
             onChange={(e) => setToCurrency(e.target.value.trim().toLowerCase())}
             placeholder="usd"
           />
-          <div className="mt-6 text-sm">
-            {isFetching ? (
-              <span className="text-zinc-500">Fetching rate...</span>
-            ) : output != null ? (
-              <span className="font-medium">
-                {formatNumber(output, { maximumFractionDigits: 6 })}
-              </span>
-            ) : (
-              <span className="text-zinc-500">Enter valid amount / pair</span>
-            )}
-          </div>
+          <label className="block text-xs text-zinc-500 mt-2">Result</label>
+          <input
+            className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm focus:outline-none focus:ring-0 focus:border-zinc-300"
+            value={
+              isFetching
+                ? ""
+                : output != null
+                ? formatNumber(output, { maximumFractionDigits: 6 })
+                : ""
+            }
+            readOnly
+            placeholder={isFetching ? "Fetching rate..." : "Enter valid amount / pair"}
+          />
         </div>
       </div>
     </Card>
