@@ -2,6 +2,9 @@
 
 A modern, real-time cryptocurrency market dashboard and currency converter built with Next.js 15, TypeScript, and Tailwind CSS.
 
+<img width="1279" height="678" alt="image" src="https://github.com/user-attachments/assets/20e58fa0-3a2a-48a6-8f67-1d5a82b9bbde" />
+
+
 ## ✨ Features
 
 - **📊 Market Dashboard**: Live cryptocurrency prices with 24h change indicators
