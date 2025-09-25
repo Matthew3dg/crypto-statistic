@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const baseUrl = process.env.COIN_GECKO_BASE_URL;
+
 type CoinMarket = {
   id: string;
   symbol: string;
@@ -46,7 +48,7 @@ type SimplePriceResponse = Record<string, Record<string, number>>;
 export const coingeckoApi = createApi({
   reducerPath: "coingeckoApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.coingecko.com/api/v3",
+    baseUrl: baseUrl,
     prepareHeaders: (headers) => {
       headers.set("accept", "application/json");
       return headers;
@@ -72,7 +74,7 @@ export async function getTopCoins(
   currency: string = "usd",
   perPage: number = 20
 ): Promise<CoinMarket[]> {
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${encodeURIComponent(
+  const url = `${baseUrl}/coins/markets?vs_currency=${encodeURIComponent(
     currency
   )}&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=false&price_change_percentage=24h`;
 
@@ -93,7 +95,7 @@ export async function getTopCoins(
 }
 // Server-side function for fetching trending coins data
 export async function getTrendingCoins(): Promise<TrendingResponse> {
-  const url = `https://api.coingecko.com/api/v3/search/trending`;
+  const url = `${baseUrl}/search/trending`;
 
   const response = await fetch(url, {
     headers: {
