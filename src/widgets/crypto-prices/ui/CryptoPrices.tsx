@@ -1,22 +1,20 @@
-import { getTopCoins, type CoinMarket } from "@/src/shared/api/coingecko";
+import { type CoinMarket } from "@/src/shared/api/coingecko";
 import { formatNumber } from "@/src/shared/lib/format";
 import { Card } from "@/src/shared/ui/Card";
 import Image from "next/image";
 
-export async function CryptoPrices() {
-  let data: CoinMarket[] = [];
-  let error: string | null = null;
+interface CryptoPricesProps {
+  data: CoinMarket[];
+  error: unknown;
+}
 
-  try {
-    data = await getTopCoins("usd", 10);
-  } catch (err) {
-    error = err instanceof Error ? err.message : "Failed to load data";
-  }
+export function CryptoPrices({ data, error }: CryptoPricesProps) {
+  const errorMessage = error instanceof Error ? error.message : "Failed to load data";
 
   return (
     <Card title="Top Crypto Prices">
       {error ? (
-        <div className="text-sm text-red-600">{error}</div>
+        <div className="text-sm text-red-600">{errorMessage}</div>
       ) : (
         <ul className="divide-y divide-zinc-200">
           {data.map((coin) => (

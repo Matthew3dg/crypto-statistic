@@ -1,21 +1,19 @@
-import { getTrendingCoins, type TrendingResponse } from "@/src/shared/api/coingecko";
+import { type TrendingResponse } from "@/src/shared/api/coingecko";
 import { Card } from "@/src/shared/ui/Card";
 import Image from "next/image";
 
-export async function NewsFeed() {
-  let data: TrendingResponse = { coins: [] };
-  let error: string | null = null;
+interface NewsFeedProps {
+  data: TrendingResponse;
+  error: unknown;
+}
 
-  try {
-    data = await getTrendingCoins();
-  } catch (err) {
-    error = err instanceof Error ? err.message : "Failed to load data";
-  }
+export function NewsFeed({ data, error }: NewsFeedProps) {
+  const errorMessage = error instanceof Error ? error.message : "Failed to load trending coins";
 
   return (
     <Card title="Trending Coins">
       {error ? (
-        <div className="text-sm text-red-600">Failed to load trending coins</div>
+        <div className="text-sm text-red-600">{errorMessage}</div>
       ) : (
         <ul className="space-y-3">
           {data?.coins.slice(0, 10).map((coin) => (
