@@ -1,17 +1,20 @@
-"use client";
-
+import { getTrendingCoins, type TrendingResponse } from "@/src/shared/api/coingecko";
 import { Card } from "@/src/shared/ui/Card";
-import { useGetTrendingQuery } from "@/src/shared/api/coingecko";
 import Image from "next/image";
 
-export function NewsFeed() {
-  const { data, isLoading, isError } = useGetTrendingQuery();
+export async function NewsFeed() {
+  let data: TrendingResponse = { coins: [] };
+  let error: string | null = null;
+
+  try {
+    data = await getTrendingCoins();
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Failed to load data";
+  }
 
   return (
     <Card title="Trending Coins">
-      {isLoading ? (
-        <div className="text-sm text-zinc-500">Loading...</div>
-      ) : isError ? (
+      {error ? (
         <div className="text-sm text-red-600">Failed to load trending coins</div>
       ) : (
         <ul className="space-y-3">

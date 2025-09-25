@@ -53,12 +53,6 @@ export const coingeckoApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTopCoins: builder.query<CoinMarket[], { currency: string; perPage?: number }>({
-      query: ({ currency, perPage = 20 }) =>
-        `/coins/markets?vs_currency=${encodeURIComponent(
-          currency
-        )}&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=false&price_change_percentage=24h`,
-    }),
     getTrending: builder.query<TrendingResponse, void>({
       query: () => "/search/trending",
     }),
@@ -71,6 +65,50 @@ export const coingeckoApi = createApi({
   }),
 });
 
-export const { useGetTopCoinsQuery, useGetTrendingQuery, useGetSimplePriceQuery } = coingeckoApi;
+export const { useGetSimplePriceQuery } = coingeckoApi;
 
-export type { CoinMarket, TrendingCoin };
+// Server-side function for fetching top coins data
+export async function getTopCoins(
+  currency: string = "usd",
+  perPage: number = 20
+): Promise<CoinMarket[]> {
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${encodeURIComponent(
+    currency
+  )}&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=false&price_change_percentage=24h`;
+
+  const response = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+    next: {
+      revalidate: 900, // 15 minutes = 900 seconds
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch top coins: ${response.status}`);
+  }
+
+  return response.json();
+}
+// Server-side function for fetching trending coins data
+export async function getTrendingCoins(): Promise<TrendingResponse> {
+  const url = `https://api.coingecko.com/api/v3/search/trending`;
+
+  const response = await fetch(url, {
+    headers: {
+      accept: "application/json",
+    },
+    next: {
+      revalidate: 900, // 15 minutes = 900 seconds
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch top coins: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export type { CoinMarket, TrendingCoin, TrendingResponse };

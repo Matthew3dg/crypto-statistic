@@ -1,22 +1,25 @@
-"use client";
-
-import { useGetTopCoinsQuery } from "@/src/shared/api/coingecko";
+import { getTopCoins, type CoinMarket } from "@/src/shared/api/coingecko";
 import { formatNumber } from "@/src/shared/lib/format";
 import { Card } from "@/src/shared/ui/Card";
 import Image from "next/image";
 
-export function CryptoPrices() {
-  const { data, isLoading, isError } = useGetTopCoinsQuery({ currency: "usd", perPage: 10 });
+export async function CryptoPrices() {
+  let data: CoinMarket[] = [];
+  let error: string | null = null;
+
+  try {
+    data = await getTopCoins("usd", 10);
+  } catch (err) {
+    error = err instanceof Error ? err.message : "Failed to load data";
+  }
 
   return (
     <Card title="Top Crypto Prices">
-      {isLoading ? (
-        <div className="text-sm text-zinc-500">Loading...</div>
-      ) : isError ? (
-        <div className="text-sm text-red-600">Failed to load data</div>
+      {error ? (
+        <div className="text-sm text-red-600">{error}</div>
       ) : (
         <ul className="divide-y divide-zinc-200">
-          {data?.map((coin) => (
+          {data.map((coin) => (
             <li key={coin.id} className="flex items-center justify-between py-2">
               <div className="flex items-center gap-3">
                 <Image
